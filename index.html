@@ -1157,13 +1157,13 @@
             audioPlayer = document.getElementById('audio-player');
             if (audioPlayer) {
                 audioPlayer.volume = 0.7;
+                audioPlayer.currentTime = 5; // Bắt đầu từ giây thứ 5
             }
         }
 
         function startMusic() {
             if (!audioPlayer) initAudio();
             if (audioPlayer && !musicPlaying) {
-                // Bài hát "Beautiful in White" phát tự nhiên từ giây 0
                 audioPlayer.play().then(() => {
                     musicPlaying = true;
                     document.getElementById('music-bar').classList.add('visible');
@@ -1171,12 +1171,18 @@
                     document.getElementById('music-bar').classList.remove('paused');
                 }).catch(err => {
                     console.log("Audio play blocked or failed:", err);
-                    // Hiển thị thanh nhạc để người dùng nhấn Play thủ công nếu bị chặn
                     document.getElementById('music-bar').classList.add('visible');
                     document.getElementById('music-toggle').textContent = '▶';
                     document.getElementById('music-bar').classList.add('paused');
                 });
             }
+        }
+
+        // Tự động phát nhạc khi người dùng tương tác lần đầu với trang
+        function tryAutoPlay() {
+            if (!musicPlaying) startMusic();
+            document.removeEventListener('click', tryAutoPlay);
+            document.removeEventListener('touchstart', tryAutoPlay);
         }
 
         function toggleMusic() {
