@@ -529,16 +529,24 @@
             min-height: 100vh;
             padding: 32px 16px;
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
 
         #admin-page.show {
             display: block;
+            animation: fadeInHeader 0.6s ease forwards;
         }
 
         .admin-wrap {
             max-width: 920px;
             margin: 0 auto;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 35px rgba(44, 74, 114, 0.1);
         }
 
         .admin-header {
@@ -548,102 +556,164 @@
 
         .admin-header h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-size: clamp(2rem, 6vw, 2.6rem);
             color: var(--navy);
             margin-bottom: 6px;
+            text-shadow: 0 2px 10px rgba(44, 74, 114, 0.05);
+            border-bottom: 1px solid rgba(201, 151, 58, 0.3);
+            display: inline-block;
+            padding-bottom: 5px;
         }
 
         .admin-header p {
             color: var(--navy-light);
-            font-size: 0.84rem;
+            font-size: 0.88rem;
+            margin-top: 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .admin-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 4px 15px rgba(44, 74, 114, 0.05);
+            border: 1px solid rgba(184, 223, 240, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            font-size: 1.8rem;
+            background: var(--sky-pale);
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            color: var(--navy);
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--navy-light);
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1.2;
         }
 
         .admin-card {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 8px 30px rgba(44, 74, 114, 0.1);
-            margin-bottom: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(44, 74, 114, 0.06);
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         .admin-card h2 {
             color: var(--navy);
-            font-size: 1.05rem;
-            margin-bottom: 14px;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
             padding-bottom: 10px;
             border-bottom: 1px solid var(--sky-light);
         }
 
         .form-row {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 12px;
             align-items: flex-end;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
             flex: 1;
-            min-width: 150px;
         }
 
         .form-group label {
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--navy-light);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
         }
 
-        .form-group input,
-        .form-group select {
+        .form-group input {
             border: 1.5px solid var(--sky-light);
-            border-radius: 8px;
-            padding: 9px 12px;
+            border-radius: 10px;
+            padding: 10px 16px;
             font-family: 'Nunito', sans-serif;
-            font-size: 0.88rem;
+            font-size: 0.95rem;
             color: var(--navy);
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.2s;
             background: #fff;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: var(--sky);
+        .form-group input:focus {
+            border-color: var(--gold-light);
+            box-shadow: 0 0 0 3px rgba(201, 151, 58, 0.15);
         }
 
         .btn-add {
-            background: var(--navy);
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
             color: #fff;
             border: none;
-            border-radius: 8px;
-            padding: 9px 22px;
+            border-radius: 10px;
+            padding: 10px 28px;
             font-family: 'Nunito', sans-serif;
-            font-size: 0.86rem;
+            font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
             white-space: nowrap;
-            transition: background 0.2s, transform 0.15s;
-            height: 40px;
+            transition: all 0.2s ease;
+            height: 44px;
+            box-shadow: 0 4px 15px rgba(44, 74, 114, 0.2);
         }
 
         .btn-add:hover {
-            background: var(--navy-light);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 74, 114, 0.3);
         }
 
         .table-wrap {
             overflow-x: auto;
-            border-radius: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--sky-light);
+            background: #fff;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.82rem;
+            font-size: 0.88rem;
         }
 
         thead tr {
@@ -652,15 +722,16 @@
         }
 
         thead th {
-            padding: 10px 12px;
+            padding: 12px 16px;
             text-align: left;
             font-weight: 600;
             white-space: nowrap;
+            letter-spacing: 0.03em;
         }
 
         tbody tr {
             border-bottom: 1px solid var(--sky-pale);
-            transition: background 0.15s;
+            transition: background 0.2s;
         }
 
         tbody tr:hover {
@@ -668,112 +739,87 @@
         }
 
         tbody td {
-            padding: 9px 12px;
+            padding: 12px 16px;
             color: var(--navy);
             vertical-align: middle;
         }
 
-        .link-cell {
-            font-size: 0.74rem;
-            color: var(--navy-light);
-            word-break: break-all;
-            max-width: 200px;
-        }
-
-        .link-cell a {
-            color: var(--navy-light);
-            text-decoration: none;
-        }
-
-        .link-cell a:hover {
-            text-decoration: underline;
-        }
-
-        .copy-btn {
-            background: var(--sky-light);
-            border: none;
-            border-radius: 6px;
-            padding: 3px 9px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            color: var(--navy);
-            font-weight: 700;
-            transition: background 0.15s;
-        }
-
-        .copy-btn:hover {
-            background: var(--sky);
+        .td-name {
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         .attendance-check {
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border: 2px solid var(--sky);
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             position: relative;
-            display: grid;
+            display: inline-grid;
             place-items: center;
-            transition: background 0.2s, border-color 0.2s;
+            margin: 0 auto;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+
+        .attendance-check:hover {
+            border-color: var(--navy-light);
         }
 
         .attendance-check:checked {
-            background: #5cb85c;
-            border-color: #4cae4c;
+            background: var(--navy);
+            border-color: var(--navy);
         }
 
         .attendance-check:checked::after {
             content: '✓';
             color: #fff;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 700;
             position: absolute;
         }
 
-        .lang-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.68rem;
-            font-weight: 700;
-        }
-
-        .lang-vi {
-            background: var(--sky-light);
-            color: var(--navy);
-        }
-
-        .lang-en {
-            background: #e8f4e8;
-            color: #2d6a2d;
+        /* Checkbox đặc biệt cho cột Đã nhắc */
+        .check-reminded:checked {
+            background: var(--gold);
+            border-color: var(--gold);
         }
 
         .del-btn {
-            background: #fee;
-            border: none;
-            border-radius: 6px;
-            padding: 3px 8px;
+            background: #fff5f5;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 5px 10px;
             cursor: pointer;
-            color: #c0392b;
-            font-size: 0.74rem;
-            transition: background 0.15s;
+            color: #dc2626;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.2s;
         }
 
         .del-btn:hover {
-            background: #fcc;
+            background: #fee2e2;
+            transform: scale(1.05);
         }
 
         .empty-state {
             text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
             color: var(--navy-light);
-            font-size: 0.84rem;
+            font-size: 0.95rem;
+            font-style: italic;
         }
 
         @media(max-width:520px) {
+            .admin-wrap {
+                padding: 20px 15px;
+            }
+
             .form-row {
                 flex-direction: column;
+                align-items: stretch;
             }
 
             .btn-add {
@@ -917,50 +963,67 @@
                 <p>Quản lý danh sách khách mời – Thiệp tốt nghiệp Trần Bảo Ngân</p>
             </div>
 
-            <div class="admin-card">
-                <h2>✦ Thêm khách mời mới</h2>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Tên người mời</label>
-                        <input type="text" id="inputName" placeholder="VD: Nguyễn Minh Anh"
-                            onkeydown="if(event.key==='Enter')addGuest()" />
+            <!-- Bảng Thống kê -->
+            <div class="admin-stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">👥</span>
+                    <div class="stat-info">
+                        <span class="stat-label">Tổng khách mời</span>
+                        <span class="stat-value" id="statTotal">0</span>
                     </div>
-                    <div class="form-group" style="max-width:145px">
-                        <label>Ngôn ngữ thiệp</label>
-                        <select id="inputLang">
-                            <option value="vi">🇻🇳 Tiếng Việt</option>
-                            <option value="en">🇺🇸 English</option>
-                        </select>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">✨</span>
+                    <div class="stat-info">
+                        <span class="stat-label">Xác nhận đi</span>
+                        <span class="stat-value" style="color: #2e7d32;" id="statGoing">0</span>
                     </div>
-                    <button class="btn-add" onclick="addGuest()">+ Thêm</button>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">⏳</span>
+                    <div class="stat-info">
+                        <span class="stat-label">Không đi</span>
+                        <span class="stat-value" style="color: #c62828;" id="statDeclined">0</span>
+                    </div>
                 </div>
             </div>
 
             <div class="admin-card">
-                <h2>✦ Danh sách khách mời (<span id="guestCount">0</span>)</h2>
+                <h2>✦ Thêm khách mời mới</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Họ tên khách mời</label>
+                        <input type="text" id="inputName" placeholder="VD: Nguyễn Văn A"
+                            onkeydown="if(event.key==='Enter')addGuest()" autocomplete="off" />
+                    </div>
+                    <button class="btn-add" onclick="addGuest()">+ Thêm mới</button>
+                </div>
+            </div>
+
+            <div class="admin-card">
+                <h2>✦ Danh sách chi tiết</h2>
                 <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Tên khách mời</th>
-                                <th>Ngôn ngữ</th>
-                                <th>Link thiệp</th>
-                                <th>Có đi</th>
-                                <th>Xoá</th>
+                                <th>Họ tên</th>
+                                <th style="text-align: center;">Có đi</th>
+                                <th style="text-align: center;">Đã nhắc</th>
+                                <th style="text-align: center;">Xoá</th>
                             </tr>
                         </thead>
                         <tbody id="guestTbody">
                             <tr>
-                                <td colspan="6" class="empty-state">Chưa có khách mời nào.</td>
+                                <td colspan="5" class="empty-state">Chưa có dữ liệu. Hãy thêm khách mời ở trên!</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <div style="text-align:center">
-                <button class="back-btn" onclick="showMain()">← Về trang thiệp</button>
+            <div style="text-align:center; margin-top: 20px;">
+                <button class="back-btn" onclick="showMain()">← Quay lại trang thiệp</button>
             </div>
         </div>
     </div>
@@ -1089,156 +1152,113 @@
         }
 
         // ══════════ ADMIN – GUESTS ══════════
-        function getBase() { return window.location.origin + window.location.pathname; }
-
         function addGuest() {
             const name = document.getElementById('inputName').value.trim();
-            const lang = document.getElementById('inputLang').value;
             if (!name) { document.getElementById('inputName').focus(); return; }
-            guests.unshift({ id: Date.now(), name, lang, attended: false });
-            save(); renderTable();
+            guests.unshift({ id: Date.now(), name: name, going: false, reminded: false });
+            save();
             document.getElementById('inputName').value = '';
             document.getElementById('inputName').focus();
         }
-        function toggleAtt(id) {
+        function toggleGoing(id) {
             const g = guests.find(x => x.id === id);
-            if (g) { g.attended = !g.attended; save(); }
+            if (g) {
+                // Hỗ trợ cả trường attended cũ
+                let current = g.going !== undefined ? g.going : g.attended;
+                g.going = !current;
+                g.attended = g.going; // sync for backward comp
+                save();
+            }
+        }
+        function toggleReminded(id) {
+            const g = guests.find(x => x.id === id);
+            if (g) { g.reminded = !g.reminded; save(); }
         }
         function delGuest(id) {
-            if (!confirm('Xoá khách này?')) return;
+            if (!confirm('Bạn có chắc chắn muốn xoá khách này?')) return;
             guests = guests.filter(x => x.id !== id);
-            save(); renderTable();
+            save();
         }
         function save() {
             localStorage.setItem('grad_guests', JSON.stringify(guests));
-            document.getElementById('guestCount').textContent = guests.length;
-        }
-        function copyLink(url) {
-            navigator.clipboard.writeText(url).then(() => toast('📋 Đã copy link!'));
-        }
-        function toast(msg) {
-            const t = document.createElement('div');
-            t.textContent = msg;
-            t.style.cssText = 'position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#2c4a72;color:#fff;padding:8px 20px;border-radius:50px;font-size:0.8rem;z-index:9999;font-family:Nunito,sans-serif;white-space:nowrap;';
-            document.body.appendChild(t); setTimeout(() => t.remove(), 2200);
+            renderTable();
         }
         function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-        function escA(s) { return s.replace(/'/g, '&#39;'); }
 
         function renderTable() {
-            document.getElementById('guestCount').textContent = guests.length;
+            // Tính toán thống kê
+            let total = guests.length;
+            let going = 0;
+            let declined = 0;
+
+            guests.forEach(g => {
+                let isGoing = g.going !== undefined ? g.going : g.attended;
+                if (isGoing) going++;
+                else declined++;
+            });
+
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statGoing').textContent = going;
+            document.getElementById('statDeclined').textContent = declined;
+
             const tbody = document.getElementById('guestTbody');
             if (!guests.length) {
-                tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Chưa có khách mời nào.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">Chưa có dữ liệu. Hãy thêm khách mời ở trên!</td></tr>';
                 return;
             }
             tbody.innerHTML = guests.map((g, i) => {
-                const url = getBase() + '?name=' + encodeURIComponent(g.name) + '&lang=' + g.lang;
+                let isGoing = g.going !== undefined ? g.going : g.attended;
+                let isReminded = g.reminded || false;
+
                 return `<tr>
                     <td>${i + 1}</td>
-                    <td><strong>${esc(g.name)}</strong></td>
-                    <td><span class="lang-badge lang-${g.lang}">${g.lang === 'vi' ? '🇻🇳 VI' : '🇺🇸 EN'}</span></td>
-                    <td class="link-cell">
-                        <a href="${esc(url)}" target="_blank">${esc(url.replace(window.location.origin, ''))}</a><br>
-                        <button class="copy-btn" onclick="copyLink('${escA(url)}')">Copy</button>
+                    <td class="td-name">${esc(g.name)}</td>
+                    <td style="text-align: center;">
+                        <input type="checkbox" class="attendance-check" ${isGoing ? 'checked' : ''} onchange="toggleGoing(${g.id})" />
                     </td>
-                    <td><input type="checkbox" class="attendance-check" ${g.attended ? 'checked' : ''} onchange="toggleAtt(${g.id})" /></td>
-                    <td><button class="del-btn" onclick="delGuest(${g.id})">✕</button></td>
+                    <td style="text-align: center;">
+                        <input type="checkbox" class="attendance-check check-reminded" ${isReminded ? 'checked' : ''} onchange="toggleReminded(${g.id})" />
+                    </td>
+                    <td style="text-align: center;">
+                        <button class="del-btn" onclick="delGuest(${g.id})" title="Xoá khách mời này">✕</button>
+                    </td>
                 </tr>`;
             }).join('');
         }
 
         // ══════════ AUDIO PLAYER ══════════
-        let ytPlayer = null;
-        let ytPlayerReady = false;
         let musicPlaying = false;
-
-        // Tải YouTube Iframe Player API bất đồng bộ
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        window.onYouTubeIframeAPIReady = function () {
-            ytPlayer = new YT.Player('yt-player', {
-                height: '100',
-                width: '100',
-                videoId: 'd3hXxAAuP2U',
-                playerVars: {
-                    'playsinline': 1,
-                    'start': 51,
-                    'loop': 1,
-                    'playlist': 'd3hXxAAuP2U',
-                    'controls': 0,
-                    'disablekb': 1,
-                    'fs': 0,
-                    'modestbranding': 1,
-                    'rel': 0,
-                    'showinfo': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        };
-
-        function onPlayerReady(event) {
-            ytPlayerReady = true;
-            ytPlayer.setVolume(70);
-
-            // Nếu người dùng đã mở phong bì trước khi player load xong, tự động phát
-            if (musicPlaying) {
-                playYTSong();
-            }
-        }
-
-        function onPlayerStateChange(event) {
-            // Đảm bảo loop hoạt động chính xác (quay lại giây thứ 51 khi hết bài)
-            if (event.data === YT.PlayerState.ENDED) {
-                if (ytPlayer && ytPlayerReady) {
-                    ytPlayer.seekTo(51);
-                    ytPlayer.playVideo();
-                }
-            }
-        }
-
-        function playYTSong() {
-            if (ytPlayer && ytPlayerReady) {
-                ytPlayer.seekTo(51);
-                ytPlayer.playVideo();
-                musicPlaying = true;
-                document.getElementById('music-bar').classList.add('visible');
-                document.getElementById('music-toggle').textContent = '⏸';
-                document.getElementById('music-bar').classList.remove('paused');
-            }
-        }
+        let ytIframe = null;
 
         function initAudio() {
-            // Không làm gì, YouTube player được tự động khởi tạo qua API
+            // Không làm gì
         }
 
         function startMusic() {
             musicPlaying = true;
-            if (ytPlayer && ytPlayerReady) {
-                playYTSong();
-            } else {
-                // Hiển thị thanh nhạc trước, nhạc sẽ phát ngay khi player sẵn sàng
-                document.getElementById('music-bar').classList.add('visible');
-                document.getElementById('music-toggle').textContent = '⏸';
-                document.getElementById('music-bar').classList.remove('paused');
-            }
+            document.getElementById('music-bar').classList.add('visible');
+            document.getElementById('music-toggle').textContent = '⏸';
+            document.getElementById('music-bar').classList.remove('paused');
+
+            // Tạo iframe ẩn để phát nhạc qua YouTube embed, tự động tua đến giây thứ 53
+            const container = document.getElementById('yt-player');
+            container.innerHTML = `<iframe id="yt-iframe" src="https://www.youtube.com/embed/d3hXxAAuP2U?start=53&autoplay=1&loop=1&playlist=d3hXxAAuP2U" allow="autoplay" style="position: absolute; width: 1px; height: 1px; left: -9999px; border: none;"></iframe>`;
+            ytIframe = document.getElementById('yt-iframe');
         }
 
         function toggleMusic() {
-            if (!ytPlayer || !ytPlayerReady) return;
+            const container = document.getElementById('yt-player');
             if (musicPlaying) {
-                ytPlayer.pauseVideo();
+                // Tạm dừng bằng cách xoá iframe khỏi DOM
+                container.innerHTML = '';
+                ytIframe = null;
                 musicPlaying = false;
                 document.getElementById('music-toggle').textContent = '▶';
                 document.getElementById('music-bar').classList.add('paused');
             } else {
-                ytPlayer.playVideo();
+                // Phát lại bằng cách tạo mới iframe từ đầu
+                container.innerHTML = `<iframe id="yt-iframe" src="https://www.youtube.com/embed/d3hXxAAuP2U?start=53&autoplay=1&loop=1&playlist=d3hXxAAuP2U" allow="autoplay" style="position: absolute; width: 1px; height: 1px; left: -9999px; border: none;"></iframe>`;
+                ytIframe = document.getElementById('yt-iframe');
                 musicPlaying = true;
                 document.getElementById('music-toggle').textContent = '⏸';
                 document.getElementById('music-bar').classList.remove('paused');
